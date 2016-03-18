@@ -1,6 +1,11 @@
 # git-issues
 Python script to import issues from TFS 2010 via CSV file to Git repo
 
+### Note:
+If you use this I would HIGHLY recommend commenting out the call to create the issue on Github and first making sure your CSV is being parsed as YOU intend and only then running it to create the issues on Git or you may end up with a lot of funky issues that do not look quite like you'd want.  You will need to change the milestone values to YOUR values in main.
+
+The Git documentation was quite helpful: https://developer.github.com/v3/issues/#create-an-issue
+
 ### Usage:
 First export your TFS items to a CSV file, I'd recommend using the built in SQL Server extract data function and using TAB as your delimiter - it will most likely take
 some experimenting to get it to work correctly.  The following two queries are what I used:
