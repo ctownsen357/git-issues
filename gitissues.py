@@ -33,23 +33,6 @@ def file_len(fname):
             pass
     return i + 1
 
-#used the following queries to get the TFS items out of the SQL Server database (TFS 2010, YMMV on other versions of TFS)
-#            select LT.ID, LT.AddedDate as AddedDate, WL.Title, LT.Words as Words, WL.[Work Item Type], WL.Fld10002 as ItemPriority
-#            into ##data
-#            from WorkItemLongTexts as LT
-#            JOIN WorkItemsAre as WIA ON WIA.ID = LT.ID
-#            join WorkItemsLatest as WL ON WL.ID = LT.ID
-#            WHERE WIA.State not in ('Done', 'Removed')
-#This query was then used to collapse some entries that had duplicate IDs in the system with different "descriptions 'Words' in the TFS 2010 nomenclature."
-#I used the SQL Server data export feature and specified that the output CSV had | as the separator.
-#            select ID, MAX(AddedDate) as AddedDate, Title, [Work Item Type] as WorkItemType, ItemPriority,
-#            CAST(STUFF(( select ' | '  +  cast(Words as varchar(max)) from ##data as d2 where d2.ID = d1.ID FOR XML PATH(''), TYPE).value('.[1]', 'nvarchar(max)'), 1, 2, '') as varchar(max)) as body
-#            from ##data as d1
-#            group by ID, Title, [Work Item Type], ItemPriority
-#            order by ID
-
-#make_github_issue('Issue Title', 'Body text', 'assigned_user', 3, ['bug'])
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--username', help='User name for Git account', required=True)
