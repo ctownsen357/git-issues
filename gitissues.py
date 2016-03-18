@@ -1,4 +1,3 @@
-#adapted from another
 import json
 import requests
 import argparse
